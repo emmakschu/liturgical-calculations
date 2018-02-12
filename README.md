@@ -18,16 +18,16 @@ Languages Covered:
 The project will begin with languages I am most comfortable with, and
 which I tend to use the most, namely:
 
-	* C
-	* Python
-	* Cython
+* C
+* Python
+* Cython
 
 I am planning to add:
 
-	* Java
-	* Perl
-	* IA-64 Assembly (why not?)
-	* JavaScript
+* Java
+* Perl
+* IA-64 Assembly (why not?)
+* JavaScript
 
 How to use the libraries:
 -------------------------
