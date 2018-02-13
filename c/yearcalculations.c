@@ -1,8 +1,10 @@
 #include <time.h>
 
-int calc_golden_number (struct tm date)
+
+int calc_golden_number_from_year (int year)
 	/**
-	 * Calculate the golden number (Aur. num.)
+	 * Calculate the golden number (Aur. num.) from an integer
+	 * representing the year
 	 *
 	 * from `De anno et eius partibus` (Gregory Pp XIII):
 	 *
@@ -12,8 +14,6 @@ int calc_golden_number (struct tm date)
 	 * superest, erit Aureus numerus 19"
 	 */
 {
-	int year = date.tm_year + 1900;
-
 	int golden_num = (year + 1) % 19;
 
 	if (golden_num == 0)
@@ -24,9 +24,24 @@ int calc_golden_number (struct tm date)
 	return golden_num;
 }
 
-int calc_epacts (struct tm date)
+int calc_golden_number_from_tm (struct tm date)
 	/**
-	 * Calculate the epacts for a given year
+	 * Calculate the golden number (Aur. num.) from a time `tm`
+	 * structure
+	 */
+{
+	int year = date.tm_year + 1900;
+
+	int golden_num = calc_golden_num_from_year (year); 
+
+	return golden_num;
+}
+
+
+int calc_epacts_from_year (int year)
+	/**
+	 * Calculate the epacts for the year from an integer representing
+	 * the year
 	 *
 	 * Valid for the years from 1900 to 2199, as laid out by 
 	 * Pope Gregory XIII in `De anno et eius partibus`
@@ -34,12 +49,32 @@ int calc_epacts (struct tm date)
 	 * The number 0 indicates the symbol '*' in written calendars
 	 */
 {
+	int golden_num;
+	int epacts;
+
+	golden_num = calc_golden_number_from_year (year);
+	epacts = (golden_num * 11 + 18) % 30;
+
+	return epacts;
+}
+
+int calc_epacts_from_tm (struct tm date)
+	/**
+	 * Calculate the epacts for the year from a time `tm` structure
+	 *
+	 * Valid for the years from 1900 to 2199, as laid out by
+	 * Pope Gregory XIII in `De anno et eius partibus`
+	 *
+	 * The number 0 corresponds to the symbol '*' in written
+	 * calendars
+	 */
+{
 	int golden_num; 
-	int epact;
+	int epacts;
 
-	golden_num = calc_golden_number (date);
-	epact = (golden_num * 11 + 18) % 30;
+	golden_num = calc_golden_number_from_tm (date);
+	epacts = (golden_num * 11 + 18) % 30;
 
-	return epact;
+	return epacts;
 }
 
